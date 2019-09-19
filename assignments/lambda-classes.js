@@ -36,6 +36,10 @@ class Person{
 let kye = new Person('kyle', 32, 'atlanta');
 kye.speak();
 
+class Student extends Person{
+  constructor(name, age, location, special, favLang)
+}
+
 class Instructor extends Person{
   constructor(name, age, location, special, favLang, catchPhrase){
     super(name, age, location);
@@ -46,8 +50,12 @@ class Instructor extends Person{
   demo(subject){
     console.log(`Today we are learning about ${subject}`);
   }
+  grade(Person){
+    console.log(`${Person.name} is the person I declared earlier, thier age is ${Person.age}`);
+  }
 
 }
 //Test--------------------------------------------
 let yeet = new Instructor('keel', 23, 'lametown', "redux", 'C#', "YeetOrBeYate");
 yeet.demo("ghosts");
+yeet.grade(kye);
