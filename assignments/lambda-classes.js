@@ -1,27 +1,5 @@
 // CODE here for your Lambda Classes
 
-/////////------DOING THE SAME THING WITH OBJECT NOTATION----------------
-// class Perrson{
-//   constructor(props){
-//     this.name = props.name;
-//     this.age = props.age;
-//     this.location = props.location;
-//   }
-//   speak(){
-//     console.log(`PERRSON Hello my name is ${this.name}, I am from ${this.location}`);
-//   }
-// }
-//
-// let luck = new Perrson({
-//   name: "karen",
-//   age: 43,
-//   location: "yeetland"
-// })
-//
-// luck.speak();
-
-///////////------------OBJECT TEST END------------------------------------
-
 class Person{
   constructor(props){
     this.name = props.name;
@@ -49,6 +27,7 @@ class Student extends Person{
     this.previousBackground = props.previousBackground;
     this.className = props.className;
     this.favSubjects = props.favSubjects;
+    this.Grade = props.grade;
   }
 
   listSubjects(){
@@ -60,7 +39,14 @@ class Student extends Person{
     console.log(`${this.name} has submitted a PR for ${subject}`);
   };
   sprintChallenge(subject){
-    console.log(`${this.name} has begun sprint challenge on ${subject}`);};
+    console.log(`${this.name} has begun sprint challenge on ${subject}`);}
+  graduate(){
+    if(this.Grade > 70){
+      console.log("I'm so happy to graduate!");
+    }else{
+      console.log("Welp, looks like I'm not graduating. Time to pull on those bootstraps harder");
+    }
+  }
 }
 
 //Test-------------------------------------
@@ -70,7 +56,8 @@ let huck = new Student({
   location: "lagrange",
   previousBackground: "c#",
   className: "WEB24",
-  favSubjects: ["express", "Java", "JavaScript"]
+  favSubjects: ["express", "Java", "JavaScript"],
+  grade: 80
 })
 
 huck.listSubjects();
@@ -92,8 +79,18 @@ class Instructor extends Person{
   grade(Student,subject){
     console.log(`${Student.name} recieves a perfect score on ${subject}`);
   }
-  do(){
-    console.log(this.FavLanguage);
+
+  assignGrade(Student){
+    console.log(`So starting out ${Student.name}'s grade is ${Student.Grade}`);
+    let ranNum = Math.round(Math.random());
+    let randGrade = Math.floor(Math.random()* Math.floor(20));
+
+    if(ranNum){
+      Student.Grade += randGrade;
+    }else{
+      Student.Grade -= randGrade;
+    }
+    console.log(`Now I,${this.name}, will make ${Student.name}'s grade a ${Student.Grade} LMAOOOOOOO!`);
   }
 
 }
@@ -124,6 +121,7 @@ class ProjectManager extends Instructor{
   debugsCode(Student, subject){
     console.log(`${this.name} debugs ${Student.name}'s code on ${subject}`);
   }
+
 }
 
 //Test-----------------------------
@@ -138,3 +136,18 @@ let goody = new ProjectManager({
 
 goody.standUp("JuanWEB24");
 goody.debugsCode(huck, "Python");
+goody.assignGrade(huck);
+huck.graduate();
+
+/*
+                                                  Stretch Problem
+
+    Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.XXXXX
+
+    Now that our students have a grade build out a method on the Instructor (this will be used by BOTH instructors and PM's) that will randomly add or subtract points to a student's grade. Math.random will help.
+
+    Add a graduate method to a student.
+    his method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
+    If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
+
+*/
